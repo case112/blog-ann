@@ -3,6 +3,11 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from tinymce import HTMLField
 
+STATUS = (
+    (0,"Draft"),
+    (1,"Publish")
+)
+
 User = get_user_model()
 
 class Author(models.Model):
@@ -29,6 +34,7 @@ class Post(models.Model):
 	thumbnail = models.ImageField()
 	categories = models.ManyToManyField(Category)
 	featured = models.BooleanField()
+	status = models.IntegerField(choices=STATUS, default=0)
 	previous_post = models.ForeignKey(
 		'self',
 		related_name='previous', 
