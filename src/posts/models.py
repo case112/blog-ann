@@ -25,9 +25,10 @@ class Category(models.Model):
 
 class Post(models.Model):
 	title = models.CharField(max_length=100)
+	slug = models.SlugField(max_length=200, unique=True, default="")
 	overview = models.TextField()
 	timestamp = models.DateTimeField(auto_now_add=True)
-	content = HTMLField()
+	content = HTMLField(default="")
 	comment_count = models.IntegerField(default=0)
 	view_count = models.IntegerField(default=0)
 	author = models.ForeignKey(Author, on_delete=models.CASCADE)
