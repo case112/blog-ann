@@ -3,8 +3,8 @@ from django.shortcuts import render, get_object_or_404
 from . models import Post
 
 def index(request):
-	featured = Post.objects.filter(featured=True)
-	latest = Post.objects.order_by('-timestamp')[0:3]
+	featured = Post.objects.filter(status=1, featured=True)
+	latest = Post.objects.filter(status=1).order_by('-created_on')[0:3]
 	context = {
 		'object_list': featured,
 		'latest': latest,
@@ -12,8 +12,8 @@ def index(request):
 	return render(request, 'index.html', context)
 
 def blog(request):
-	post_list = Post.objects.all()
-	most_recent = Post.objects.order_by('-timestamp')[0:3]
+	post_list = Post.objects.filter(status=1)
+	most_recent = Post.objects.filter(status=1).order_by('-created_on')[0:3]
 	paginator = Paginator(post_list, 6)
 	page_request_var = 'page'
 	page = request.GET.get(page_request_var)
