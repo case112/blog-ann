@@ -58,6 +58,10 @@ class Post(models.Model):
 
 	def get_absolute_url(self):
 		return reverse('post-detail', kwargs={
-			'id': self.id
+			'slug': self.slug
 		})
+
+	class Meta:
+		# order on primary key to make sure it's unique
+		ordering = ('created_on', 'title', 'pk')
 

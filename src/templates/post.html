@@ -47,6 +47,32 @@
             {% endif %}
           </div>
 
+          <div class="container">
+          <div class="post-single">
+          <div class="post-details">
+          <!-- PREVIOUS-NEXT POST BUTTON -->
+          <div class="posts-nav d-flex justify-content-between  flex-column flex-md-row">
+            {% if previous_post %}
+            <a href="{% url 'post-detail' previous_post.slug %}" class="prev-post text-left d-flex align-items-center">
+              <div class="icon prev"><i class="fa fa-angle-left"></i></div>
+              <div class="text"><strong class="text-primary">Previous post</strong>
+                <h6>{{ previous_post }}</h6>
+              </div>
+            </a>
+            {% endif %}
+            {% if next_post %}
+            <a href="{% url 'post-detail' next_post.slug %}" class="next-post text-right d-flex align-items-center justify-content-end">
+              <div class="text"><strong class="text-primary">Next Post </strong>
+                <h6>{{ next_post }}</h6>
+              </div>
+              <div class="icon next"><i class="fa fa-angle-right">   </i></div>
+            </a>
+            {% endif %}
+          </div>
+          </div>
+          </div>
+          </div>
+
 
         </div>
       </div>
