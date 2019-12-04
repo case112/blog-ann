@@ -27,58 +27,44 @@
 
           {{ post.content | safe }}
 
-          <!-- PREVIOUS-NEXT POST BUTTON -->
-          <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row">
-            {% if post.previous_post %}
-            <a href="{{ post.previous_post.get_absolute_url }}" class="prev-post text-left d-flex align-items-center">
-              <div class="icon prev"><i class="fa fa-angle-left"></i></div>
-              <div class="text"><strong class="text-primary">Previous post</strong>
-                <h6>{{ post.previous_post.title }}</h6>
-              </div>
-            </a>
-            {% endif %}
-            {% if post.next_post %}
-            <a href="{{ post.next_post.get_absolute_url }}" class="next-post text-right d-flex align-items-center justify-content-end">
-              <div class="text"><strong class="text-primary">Next Post </strong>
-                <h6>{{ post.next_post.title }}</h6>
-              </div>
-              <div class="icon next"><i class="fa fa-angle-right">   </i></div>
-            </a>
-            {% endif %}
-          </div>
+        
+          <div class="row">
+            <div class="col-10 mx-auto">
+              <div class="row">
 
-          <div class="container">
-          <div class="post-single">
-          <div class="post-details">
-          <!-- PREVIOUS-NEXT POST BUTTON -->
-          <div class="posts-nav d-flex justify-content-between  flex-column flex-md-row">
-            {% if previous_post %}
-            <a href="{% url 'post-detail' previous_post.slug %}" class="prev-post text-left d-flex align-items-center">
-              <div class="icon prev"><i class="fa fa-angle-left"></i></div>
-              <div class="text"><strong class="text-primary">Previous post</strong>
-                <h6>{{ previous_post }}</h6>
-              </div>
-            </a>
-            {% endif %}
-            {% if next_post %}
-            <a href="{% url 'post-detail' next_post.slug %}" class="next-post text-right d-flex align-items-center justify-content-end">
-              <div class="text"><strong class="text-primary">Next Post </strong>
-                <h6>{{ next_post }}</h6>
-              </div>
-              <div class="icon next"><i class="fa fa-angle-right">   </i></div>
-            </a>
-            {% endif %}
-          </div>
-          </div>
-          </div>
-          </div>
+                <div class="col-md-6">
+                  {% if previous_post %}
+                  <a href="{% url 'post-detail' previous_post.slug %}" class="text-left-prev">
+                    <div class="text">
+                      <strong class="arrow-color">
+                        <i class="fa fa-arrow-left"></i> Previous post
+                      </strong>
+                      <h6>{{ previous_post }}</h6>
+                    </div>
+                  </a>
+                  {% endif %}
+                </div>
 
+                <div class="col-md-6 text-right">
+                  {% if next_post %}
+                  <a href="{% url 'post-detail' next_post.slug %}" class="text-right-prev">
+                    <div class="text">
+                      <strong class="arrow-color">Next Post <i class="fa fa-arrow-right "></i></strong>
+                      <h6>{{ next_post }}</h6>
+                    </div>
+                  </a>
+                  {% endif %}
+                </div>
 
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </article>
 
+  
   <hr>
 
 

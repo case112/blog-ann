@@ -1,6 +1,5 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
-from next_prev import next_in_order, prev_in_order
 from . models import Post
 
 
@@ -16,7 +15,7 @@ def index(request):
 def blog(request):
 	post_list = Post.objects.filter(status=1)
 	most_recent = Post.objects.filter(status=1).order_by('-created_on')[0:3]
-	paginator = Paginator(post_list, 1)
+	paginator = Paginator(post_list, 6)
 	page_request_var = 'page'
 	page = request.GET.get(page_request_var)
 	try:
