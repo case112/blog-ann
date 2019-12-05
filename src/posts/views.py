@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from . models import Post
+from .forms import CommentForm
 
 
 def index(request):
@@ -34,21 +35,29 @@ def blog(request):
 
 def post(request, slug):
 	post = get_object_or_404(Post, slug=slug)
-
 	try:
 		next_post = post.get_next_by_created_on()
 	except Post.DoesNotExist:
 		next_post = None
-
 	try:
 		previous_post = post.get_previous_by_created_on()
 	except Post.DoesNotExist:
 		previous_post = None
 
+
+	form = CommentForm(request.POST or None)
+	if request.method == 'POST':
+		if form.is_valid():
+			comment = form.save(commit=False)
+			comment.post = post
+			comment.save()
+
 	return render(request, 'post.html', {
+		'form': form,
 		'post': post, 
 		'next_post': next_post,
 		'previous_post': previous_post,
 		})
+
 
 

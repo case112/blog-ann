@@ -1,71 +1,106 @@
 {% extends "base.html" %}
 {% block content %}
 
-  <!-- Page Header -->
-  <header class="masthead" style="background-image: url('{{ post.thumbnail.url }}')">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="post-heading">
-            <h1>{{ post.title }}</h1>
-            <h2 class="subheading">{{ post.overview }}</h2>
-            <span class="meta">Posted by
-              <a href="#">{{ post.author.user.username }}</a>
-              on {{ post.created_on|date:"F j, Y" }}</span>
-          </div>
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{ post.thumbnail.url }}')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>{{ post.title }}</h1>
+          <h2 class="subheading">{{ post.overview }}</h2>
+          <span class="meta">Posted by
+            <a href="#">{{ post.author.user.username }}</a>
+            on {{ post.created_on|date:"F j, Y" }}</span>
         </div>
       </div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- Post Content -->
-  <article>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 mx-auto">
+<!-- Post Content -->
+{{ post.content | safe }}
+    
 
-          {{ post.content | safe }}
-
+   
         
-          <div class="row">
-            <div class="col-10 mx-auto">
-              <div class="row">
+<div class="d-flex">
 
-                <div class="col-md-6">
-                  {% if previous_post %}
-                  <a href="{% url 'post-detail' previous_post.slug %}" class="text-left-prev">
-                    <div class="text">
-                      <strong class="arrow-color">
-                        <i class="fa fa-arrow-left"></i> Previous post
-                      </strong>
-                      <h6>{{ previous_post }}</h6>
-                    </div>
-                  </a>
-                  {% endif %}
-                </div>
+  <div class="mr-auto p-2">
+    {% if previous_post %}
+    <a href="{% url 'post-detail' previous_post.slug %}" class="text-right-prev">
+      <div class="text">
+        <strong class="arrow-color">
+          <i class="fa fa-arrow-left"></i> Previous post
+        </strong>
+        <h6>{{ previous_post }}</h6>
+      </div>
+    </a>
+    {% endif %}
+  </div>
 
-                <div class="col-md-6 text-right">
-                  {% if next_post %}
-                  <a href="{% url 'post-detail' next_post.slug %}" class="text-right-prev">
-                    <div class="text">
-                      <strong class="arrow-color">Next Post <i class="fa fa-arrow-right "></i></strong>
-                      <h6>{{ next_post }}</h6>
-                    </div>
-                  </a>
-                  {% endif %}
-                </div>
+  <div class="ml-auto p-2">
+    {% if next_post %}
+    <a href="{% url 'post-detail' next_post.slug %}" class="text-left-prev">
+      <div class="text">
+        <strong class="arrow-color">Next Post <i class="fa fa-arrow-right "></i></strong>
+        <h6>{{ next_post }}</h6>
+      </div>
+    </a>
+    {% endif %}
+  </div>
 
-              </div>
+</div>
+
+  <div class="post-comments row">
+
+    <div class="comment col-9 mx-auto">
+    <h3 class="h6">Post Comments<span class="no-of-comments">(3)</span></h3>
+    </div>
+
+    <div class="comment col-8 mx-auto">
+      <div class="comment-header ">
+        <div class="user d-flex align-items-center">
+          <div class="title"><strong>Jabi Hernandiz</strong><span class="date">May 2016</span></div>
+        </div>
+      </div>
+      <div class="comment-body">
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+      </div>
+    </div>
+
+
+    <div class="add-comment col-10 mx-auto">
+      <form method="POST" action="." class="commenting-form ">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-10 mx-auto">
+            <header>
+              <h3>Leave a reply</h3>
+            </header>
+            <div class="form-group">
+              {{ form }}
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-secondary">Submit Comment</button>
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
-  </article>
 
-  
-  <hr>
+  </div>
+
+
+            
+          
+
+
+
+
+<hr>
 
 
 {% endblock content %}
