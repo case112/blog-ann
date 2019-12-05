@@ -1,6 +1,6 @@
 from django import forms
 from tinymce import TinyMCE
-from . models import Post
+from . models import Post, Comment
 
 class TinyMCEWidget(TinyMCE):
 	def use_required_attribute(self, *args):
@@ -17,3 +17,24 @@ class Meta:
 	model = Post
 	fields = '__all__'
 
+
+class CommentForm(forms.ModelForm):
+	name = forms.CharField(widget=forms.Textarea(attrs={
+		'class': 'form-control',
+		'placeholder': 'Type your name',
+		'id': 'username',
+		'rows': 1,
+
+		}))
+
+	comment = forms.CharField(widget=forms.Textarea(attrs={
+		'class': 'form-control',
+		'placeholder': 'Type your comment ',
+		'id': 'usercomment',
+		'rows': 5,
+
+		}))
+
+	class Meta:
+		model = Comment
+		fields = ('name', 'comment', )
