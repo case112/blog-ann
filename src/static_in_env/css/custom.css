@@ -19,3 +19,14 @@
 .comment {
     margin: 20px 0px 20px 20px;
 }
+
+.flex-even {
+  flex: 1 1 0px;
+  border: 1px solid black;
+}
+
+.poscomm {
+
+flex: 0 0 100%;
+max-width: 100%;
+}
