@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from . models import Post
 from .forms import CommentForm
 
@@ -47,16 +47,16 @@ def post(request, slug):
 
 	form = CommentForm(request.POST or None)
 	if request.method == 'POST':
+
 		if form.is_valid():
-			comment = form.save(commit=False)
-			comment.post = post
-			comment.save()
+			form.instance.post = post
+			form.save()
 
 	return render(request, 'post.html', {
-		'form': form,
 		'post': post, 
 		'next_post': next_post,
 		'previous_post': previous_post,
+		'form': form,
 		})
 
 

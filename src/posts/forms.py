@@ -19,15 +19,14 @@ class Meta:
 
 
 class CommentForm(forms.ModelForm):
-	name = forms.CharField(widget=forms.Textarea(attrs={
+	name = forms.CharField(label='', widget=forms.TextInput(attrs={
 		'class': 'form-control',
 		'placeholder': 'Type your name',
 		'id': 'username',
-		'rows': 1,
 
 		}))
 
-	comment = forms.CharField(widget=forms.Textarea(attrs={
+	comment = forms.CharField(label='', widget=forms.Textarea(attrs={
 		'class': 'form-control',
 		'placeholder': 'Type your comment ',
 		'id': 'usercomment',
