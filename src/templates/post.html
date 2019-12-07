@@ -22,11 +22,6 @@
 
 <!-- Post Content -->
 {{ post.content | safe }}
-  
-
-
-<!-- Comments -->
-
 
 
 <div class="container">
@@ -34,139 +29,86 @@
         <!-- Latest Posts -->
         <main class="poscom blog-post col-lg-8 mx-auto"> 
           
-            
-              
+             
+          <!-- Next and Previous Post -->
+          <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row">
+            {% if previous_post %}
+            <a href="{% url 'post-detail' previous_post.slug %}" class="prev-post text-left d-flex align-items-center">
+            <div class="icon prev"><i class="fa fa-angle-left"></i></div>
+            <div class="text">
+              <strong class="text-primary">Previous Post </strong>
+              <h6>{{ previous_post }}</h6>
+            </div></a>
+             {% else %}
+             <a href="." class="prev-post text-left d-flex align-items-center">
+              <div class="text">
+                <strong class="text-primary"> </strong>
+                <h6>This is the newest post</h6>
+              </div></a>
+
+             {% endif %}
+
+             {% if next_post %}
+            <a href="{% url 'post-detail' next_post.slug %}" class="next-post text-right d-flex align-items-center justify-content-end">
+            <div class="text">
+              <strong class="text-primary">Next Post </strong>
+              <h6>{{ next_post }}</h6>
+            </div>
+            <div class="icon next"><i class="fa fa-angle-right"></i>
+            </div></a>
+             {% endif %}
+          </div>
+
+
+          <!-- Comments -->
+          <div class="post-comments">
+            {% if post.get_comments %}
+            <header>
+              <h3 class="h6">Comments<span class="no-of-comments">({{ post.comments.count where approved_comment=True }})</span></h3>
+            </header>
+            {% else %}
+            <h3 class="h6"><span ></span></h3>
+            {% endif %}
+             {% for comment in post.get_comments %}
+             {% if approved_comment.get_comments %}
+            <div class="comment">
+              <div class="comment-header d-flex justify-content-between">
+                <div class="user d-flex align-items-center">
+                  <div class="image"><img src="{% static 'img/comment.svg' %}" alt="..." class="img-fluid rounded-circle"></div>
+                  <div class="title"><strong>{{ comment.name }}</strong><span class="date">Commented on {{ comment.created_date|date:"d.m.y, G:i" }}</span></div>
+                </div>
+              </div>
+              <div class="comment-body">
+                <p>{{ comment.comment }}</p>
+              </div>
+            </div>
+             {% endif %}
+             {% endfor %}
+          </div>
+         
+
+          <!-- Add Comments -->
+          <div class="add-comment">
+            <header>
+              <h3 class="h6">Leave a comment</h3>
+            </header>
+            <form method="POST" action="." class="commenting-form">
+              {% csrf_token %}
+              <div class="row">
+                <div class="form-group col-md-12">
+                  {{ form }}
+                </div>
                 
-                
-                <!-- Next and Previous Post -->
-                <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row">
-                  {% if previous_post %}
-                  <a href="{% url 'post-detail' previous_post.slug %}" class="prev-post text-left d-flex align-items-center">
-                  <div class="icon prev"><i class="fa fa-angle-left"></i></div>
-                  <div class="text">
-                    <strong class="text-primary">Previous Post </strong>
-                    <h6>{{ previous_post }}</h6>
-                  </div></a>
-                   {% endif %}
-
-                   {% if next_post %}
-                  <a href="{% url 'post-detail' next_post.slug %}" class="next-post text-right d-flex align-items-center justify-content-end">
-                  <div class="text">
-                    <strong class="text-primary">Next Post </strong>
-                    <h6>{{ next_post }}</h6>
-                  </div>
-                  <div class="icon next"><i class="fa fa-angle-right"></i>
-                  </div></a>
-                   {% endif %}
-
+                <div class="form-group col-md-12">
+                  <button type="submit" class="btn btn-secondary">Submit Comment</button>
                 </div>
-
-
-                <div class="post-comments">
-                  <header>
-                    <h3 class="h6">Post Comments<span class="no-of-comments">(3)</span></h3>
-                  </header>
-                  <div class="comment">
-                    <div class="comment-header d-flex justify-content-between">
-                      <div class="user d-flex align-items-center">
-                        <div class="image"><img src="{% static 'img/comment.svg' %}" alt="..." class="img-fluid rounded-circle"></div>
-                        <div class="title"><strong>Jabi Hernandiz</strong><span class="date">May 2016</span></div>
-                      </div>
-                    </div>
-                    <div class="comment-body">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <div class="comment-header d-flex justify-content-between">
-                      <div class="user d-flex align-items-center">
-                        <div class="image"><img src="{% static 'img/user.svg' %}" alt="..." class="img-fluid rounded-circle"></div>
-                        <div class="title"><strong>Nikolas</strong><span class="date">May 2016</span></div>
-                      </div>
-                    </div>
-                    <div class="comment-body">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <div class="comment-header d-flex justify-content-between">
-                      <div class="user d-flex align-items-center">
-                        <div class="image"><img src="{% static 'img/user.svg' %}" alt="..." class="img-fluid rounded-circle"></div>
-                        <div class="title"><strong>John Doe</strong><span class="date">May 2016</span></div>
-                      </div>
-                    </div>
-                    <div class="comment-body">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                    </div>
-                  </div>
-                </div>
-
-
-                <div class="add-comment">
-                  <header>
-                    <h3 class="h6">Leave a reply</h3>
-                  </header>
-                  <form action="#" class="commenting-form">
-                    <div class="row">
-                      <div class="form-group col-md-6">
-                        <input type="text" name="username" id="username" placeholder="Name" class="form-control">
-                      </div>
-                      <div class="form-group col-md-6">
-                        <input type="email" name="username" id="useremail" placeholder="Email Address (will not be published)" class="form-control">
-                      </div>
-                      <div class="form-group col-md-12">
-                        <textarea name="usercomment" id="usercomment" placeholder="Type your comment" class="form-control"></textarea>
-                      </div>
-                      <div class="form-group col-md-12">
-                        <button type="submit" class="btn btn-secondary">Submit Comment</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-
-
-
-                <div class="add-comment">
-                  <header>
-                    <h3 class="h6">Leave a reply</h3>
-                  </header>
-                  <form action="POST" class="commenting-form">
-                    {% csrf_token %}
-                    <div class="row">
-                      <div class="form-group col-md-12">
-                        {{ form }}
-                      </div>
-                      
-                      <div class="form-group col-md-12">
-                        <button type="submit" class="btn btn-secondary">Submit Comment</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-
-
+              </div>
+            </form>
+          </div>
 
         </main>
       </div>
     </div>
-
-
-
-  <div class="add-comment col-lg-8 col-md-10 mx-auto">
-    <form method="POST" action="." class="commenting-form ">
-      {% csrf_token %}
-        <header>
-          <h3>Leave a reply</h3>
-        </header>
-        <div class="form-group">
-          {{ form }}
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-secondary">Submit Comment</button>
-        </div>
-    </form>
-  </div>
-
 </div>
 
 

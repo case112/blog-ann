@@ -7,10 +7,20 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ("status",)
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
+
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'comment', 'created_date', 'approved_comment')
+    list_filter = ('approved_comment', 'created_date')
+    search_fields = ('name', 'comment')
+    actions = ['approve_comments']
+
+    def approve_comments(self, request, queryset):
+        queryset.update(approved_comment=True)
   
 
 admin.site.register(Author)
 admin.site.register(Category)
 admin.site.register(Post, PostAdmin)
-admin.site.register(Comment)
+admin.site.register(Comment, CommentAdmin)
 
