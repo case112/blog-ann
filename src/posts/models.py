@@ -51,7 +51,7 @@ class Post(models.Model):
 
 	@property
 	def get_comments(self):
-		return self.comments.all().order_by('-created_date')
+		return self.comments.filter(approved_comment=True).order_by('-created_date')
 	
 
 	

@@ -64,13 +64,12 @@
           <div class="post-comments">
             {% if post.get_comments %}
             <header>
-              <h3 class="h6">Comments<span class="no-of-comments">({{ post.comments.count where approved_comment=True }})</span></h3>
+              <h3 class="h6">Comments<span class="no-of-comments">({{ post.get_comments.count }})</span></h3>
             </header>
             {% else %}
             <h3 class="h6"><span ></span></h3>
             {% endif %}
              {% for comment in post.get_comments %}
-             {% if approved_comment.get_comments %}
             <div class="comment">
               <div class="comment-header d-flex justify-content-between">
                 <div class="user d-flex align-items-center">
@@ -82,7 +81,6 @@
                 <p>{{ comment.comment }}</p>
               </div>
             </div>
-             {% endif %}
              {% endfor %}
           </div>
          
@@ -101,6 +99,7 @@
                 
                 <div class="form-group col-md-12">
                   <button type="submit" class="btn btn-secondary">Submit Comment</button>
+                  <span class="no-of-comments">( Comments appear after moderation )</span>
                 </div>
               </div>
             </form>
