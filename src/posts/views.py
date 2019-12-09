@@ -13,6 +13,13 @@ def index(request):
 	}
 	return render(request, 'index.html', context)
 
+def contact(request):
+	return render(request, 'contact.html', {})
+
+def about(request):
+	return render(request, 'about.html', {})
+
+
 def blog(request):
 	post_list = Post.objects.filter(status=1)
 	most_recent = Post.objects.filter(status=1).order_by('-created_on')[0:3]

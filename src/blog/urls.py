@@ -3,11 +3,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from posts.views import index, blog, post
+from posts.views import index, blog, post, contact, about
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
+    path('contact/', contact),
+    path('about/', about),
     path('blog/', blog, name='post-list'),
     path('post/<slug>/', post, name='post-detail'),
     path('tinymce/', include('tinymce.urls')),
