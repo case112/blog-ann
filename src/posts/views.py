@@ -2,6 +2,12 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from . models import Post
 from .forms import CommentForm
+from django.views.generic.base import TemplateView
+
+class InstaView(TemplateView):
+
+    template_name = "insta.html"
+
 
 
 def index(request):
