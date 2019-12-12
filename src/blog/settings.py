@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'sorl.thumbnail', # required for thumbnail support - django-instagram
+    'django_instagram',
     'tinymce',
     'posts',
    
