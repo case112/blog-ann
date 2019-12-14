@@ -3,24 +3,66 @@
 {% load static %}
 {% load instagram_client %}
 
-<div class="container">
-<div class="row">
-<div id="django_recent_media_wall">
-    {% instagram_user_recent_media instagram_profile_name %}
-    {% for media in recent_media %}
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{ post.thumbnail.url }}')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Insta</h1>
+          <h2 class="subheading">{{ post.overview }}</h2>
+          <span class="meta">
+            <a href="#">{{ post.author.user.username }}</a>
+            {{ post.created_on|date:"F j, Y" }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
-        <div class="django_instagram_media_wall_item col-md-3 col-sm-6 mb-4">
-            <a href="//instagram.com/p/{{ media.shortcode }}" target="_blank">
-                <img class="img-fluid" src="{{ media.thumbnail_src }}"/>
-                <span>{{ media.edge_media_to_caption.edges.0.node.text }}</span>
+
+
+<div class="container">
+    <center><h3 class="h4"><i class="fab fa-instagram"></i> anngretts</h3></center>
+<div class="row">
+
+    {% instagram_user_recent_media instagram_profile_name %}
+    
+
+        <div class="col-sm">
+            <a href="//instagram.com/p/{{ recent_media.0.shortcode }}" target="_blank">
+                <img class="img-fluid" src="{{ recent_media.0.thumbnail_src }}"/>
+                
             </a>
         </div>
-    {% endfor %}
-</div>
+
+        <div class="col-sm">
+            <a href="//instagram.com/p/{{ recent_media.1.shortcode }}" target="_blank">
+                <img class="img-fluid" src="{{ recent_media.1.thumbnail_src }}"/>
+                
+            </a>
+        </div>
+
+        <div class="col-sm">
+            <a href="//instagram.com/p/{{ recent_media.2.shortcode }}" target="_blank">
+                <img class="img-fluid" src="{{ recent_media.2.thumbnail_src }}"/>
+                
+            </a>
+        </div>
+
+        <div class="col-sm">
+            <a href="//instagram.com/p/{{ recent_media.3.shortcode }}" target="_blank">
+                <img class="img-fluid" src="{{ recent_media.3.thumbnail_src }}"/>
+                
+            </a>
+        </div>
+
 </div>
 </div>
 
 <hr>
+
 
 
 {% endblock content %}
