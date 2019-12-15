@@ -22,43 +22,37 @@
 </header>
 
 
-
+<!-- Instagram feed -->
 <div class="container">
     <center><h3 class="h4"><i class="fab fa-instagram"></i> anngretts</h3></center>
-<div class="row">
-
+    <div class="row">
     {% instagram_user_recent_media instagram_profile_name %}
     
-
         <div class="col-sm">
             <a href="//instagram.com/p/{{ recent_media.0.shortcode }}" target="_blank">
                 <img class="img-fluid" src="{{ recent_media.0.thumbnail_src }}"/>
-                
             </a>
         </div>
 
         <div class="col-sm">
             <a href="//instagram.com/p/{{ recent_media.1.shortcode }}" target="_blank">
                 <img class="img-fluid" src="{{ recent_media.1.thumbnail_src }}"/>
-                
             </a>
         </div>
 
         <div class="col-sm">
             <a href="//instagram.com/p/{{ recent_media.2.shortcode }}" target="_blank">
                 <img class="img-fluid" src="{{ recent_media.2.thumbnail_src }}"/>
-                
             </a>
         </div>
 
         <div class="col-sm">
             <a href="//instagram.com/p/{{ recent_media.3.shortcode }}" target="_blank">
                 <img class="img-fluid" src="{{ recent_media.3.thumbnail_src }}"/>
-                
             </a>
         </div>
 
-</div>
+    </div>
 </div>
 
 <hr>

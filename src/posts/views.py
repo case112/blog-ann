@@ -7,6 +7,9 @@ from django.views.generic.base import TemplateView
 class InstaView(TemplateView):
 
     template_name = "insta.html"
+    extra_context={
+        "instagram_profile_name": "anngretts"
+    }
 
 
 
@@ -16,6 +19,7 @@ def index(request):
 	context = {
 		'object_list': featured,
 		'latest': latest,
+		'instagram_profile_name': 'anngretts',
 	}
 	return render(request, 'index.html', context)
 

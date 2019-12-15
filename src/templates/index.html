@@ -1,21 +1,21 @@
 {% extends "base.html" %}
-
+{% load instagram_client %}
 {% block content %}
 
 <!-- Page Header -->
-  <header class="masthead" style="background-image: url('/static/img/banner_lighthouse.jpg')">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="post-heading">
-            <h1>WELCOME TO MY AMAZING WORLD</h1>
-            <h2 class="subheading">Sharing joy, bit by bit</h2>
-          </div>
+<header class="masthead" style="background-image: url('/static/img/banner_lighthouse.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>WELCOME TO MY AMAZING WORLD</h1>
+          <h2 class="subheading">Sharing joy, bit by bit</h2>
         </div>
       </div>
     </div>
-  </header>
+  </div>
+</header>
 
 <!-- Main Content Clean blog featured posts
   <div class="container">
@@ -46,73 +46,109 @@
   </div>
 -->
 
-  <!-- BLOG2 Featured posts -->
-   <section class="featured-posts no-padding-top">
-      <div class="container">
-        
-        <!-- Post-->
-        {% for obj in object_list %}
-        <div class="row d-flex align-items-stretch">
-          {% if not forloop.first and not forloop.last %}
-          <div class="image col-lg-5"><img src="{{ obj.thumbnail.url }}" alt="..."></div>
-          {% endif %}
-          <div class="text col-lg-7">
-            <div class="text-inner d-flex align-items-center">
-              <div class="content">
-                <header class="post-header">
-                  <div class="category">
-                    {% for cat in obj.categories.all %}
-                    <a href="#">{{ cat.title }}</a>
-                    {% endfor %}
-                  </div><a href="{{ obj.get_absolute_url }}">
-                    <h2 class="h4">{{ obj.title }}</h2></a>
-                </header>
-                <p>{{ obj.overview }}</p>
-                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                    <div class="avatar"><img src="{{ obj.author.profile_picture.url }}" alt="..." class="img-fluid"></div>
-                    <div class="title"><span>{{ obj.author }}</span></div></a>
-                  <div class="date"><i class="icon-clock"></i>{{ obj.created_on|timesince }} ago</div>
-                  <div class="comments"><i class="icon-comment"></i>{{ obj.comment_count }}</div>
-                </footer>
+<!-- BLOG2 Featured posts -->
+<section class="featured-posts no-padding-top">
+  <div class="container">
+    
+    <!-- Post-->
+    {% for obj in object_list %}
+    <div class="row d-flex align-items-stretch">
+      {% if not forloop.first and not forloop.last %}
+      <div class="image col-lg-5"><img src="{{ obj.thumbnail.url }}" alt="..."></div>
+      {% endif %}
+      <div class="text col-lg-7">
+        <div class="text-inner d-flex align-items-center">
+          <div class="content">
+            <header class="post-header">
+              <div class="category">
+                {% for cat in obj.categories.all %}
+                <a href="#">{{ cat.title }}</a>
+                {% endfor %}
               </div>
-            </div>
+              <a href="{{ obj.get_absolute_url }}">
+                <h2 class="h4">{{ obj.title }}</h2>
+              </a>
+            </header>
+            <p>{{ obj.overview }}</p>
+            <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                <div class="avatar"><img src="{{ obj.author.profile_picture.url }}" alt="..." class="img-fluid"></div>
+                <div class="title"><span>{{ obj.author }}</span></div></a>
+              <div class="date"><i class="icon-clock"></i>{{ obj.created_on|timesince }} ago</div>
+              <div class="comments"><i class="icon-comment"></i>{{ obj.comment_count }}</div>
+            </footer>
           </div>
-          {% if forloop.first or forloop.last %}
-          <div class="image col-lg-5"><img src="{{ obj.thumbnail.url }}" alt="..."></div>
-          {% endif %}
         </div>
-        {% endfor %}
       </div>
-    </section>
+      {% if forloop.first or forloop.last %}
+      <div class="image col-lg-5"><img src="{{ obj.thumbnail.url }}" alt="..."></div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
 
 <!-- Latest Posts -->
-    <section class="latest-posts"> 
-      <div class="container">
-        <header> 
-          <h2>Latest from the blog</h2>
-          <p class="text-big">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        </header>
-        <div class="row">
-          {% for obj in latest %}
-          <div class="post col-md-4">
-            <div class="post-thumbnail"><a href="#"><img src="{{ obj.thumbnail.url }}" alt="..." class="img-fluid"></a></div>
-            <div class="post-details">
-              <div class="post-meta d-flex justify-content-between">
-                <div class="date">{{ obj.created_on }}</div>
-                  <div class="category">
-                  {% for cat in obj.categories.all %}
-                  <a href="#">{{ cat.title }}</a>
-                  {% endfor %}
-                  </div>
-              </div><a href="#">
-                <h3 class="h4">{{ obj.title }}</h3></a>
-              <p class="text-muted">{{ obj.overview }}</p>
-            </div>
-          </div>
-          {% endfor %}
+<section class="latest-posts"> 
+  <div class="container">
+    <header> 
+      <h2>Latest from the blog</h2>
+      <p class="text-big">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    </header>
+    <div class="row">
+      {% for obj in latest %}
+      <div class="post col-md-4">
+        <div class="post-thumbnail"><a href="#"><img src="{{ obj.thumbnail.url }}" alt="..." class="img-fluid"></a></div>
+        <div class="post-details">
+          <div class="post-meta d-flex justify-content-between">
+            <div class="date">{{ obj.created_on }}</div>
+              <div class="category">
+              {% for cat in obj.categories.all %}
+              <a href="#">{{ cat.title }}</a>
+              {% endfor %}
+              </div>
+          </div><a href="#">
+            <h3 class="h4">{{ obj.title }}</h3></a>
+          <p class="text-muted">{{ obj.overview }}</p>
         </div>
       </div>
-    </section>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- Instagram feed -->
+<div class="container">
+    <center><h3 class="h4"><i class="fab fa-instagram"></i> anngretts</h3></center>
+    <div class="row">
+    {% instagram_user_recent_media instagram_profile_name %}
+    
+        <div class="col-sm">
+            <a href="//instagram.com/p/{{ recent_media.0.shortcode }}" target="_blank">
+                <img class="img-fluid" src="{{ recent_media.0.thumbnail_src }}"/>
+            </a>
+        </div>
+
+        <div class="col-sm">
+            <a href="//instagram.com/p/{{ recent_media.1.shortcode }}" target="_blank">
+                <img class="img-fluid" src="{{ recent_media.1.thumbnail_src }}"/>
+            </a>
+        </div>
+
+        <div class="col-sm">
+            <a href="//instagram.com/p/{{ recent_media.2.shortcode }}" target="_blank">
+                <img class="img-fluid" src="{{ recent_media.2.thumbnail_src }}"/>
+            </a>
+        </div>
+
+        <div class="col-sm">
+            <a href="//instagram.com/p/{{ recent_media.3.shortcode }}" target="_blank">
+                <img class="img-fluid" src="{{ recent_media.3.thumbnail_src }}"/>
+            </a>
+        </div>
+
+    </div>
+</div>
 
 {% endblock content %}
 

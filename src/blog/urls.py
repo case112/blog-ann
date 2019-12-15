@@ -7,10 +7,8 @@ from posts.views import index, blog, post, contact, about, InstaView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index,),
-    path('insta/', InstaView.as_view(template_name='insta.html', extra_context={
-        "instagram_profile_name": "anngretts"
-    })),
+    path('', index),
+    path('insta/', InstaView.as_view()),
     path('contact/', contact),
     path('about/', about),
     path('blog/', blog, name='post-list'),
