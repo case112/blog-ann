@@ -29,11 +29,15 @@ INSTALLED_APPS = [
     'sorl.thumbnail', # required for thumbnail support - django-instagram
     'django_instagram',
     'tinymce',
+    'debug_toolbar',
+
+
     'posts',
    
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -99,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Tallinn'
 
 USE_I18N = True
 
@@ -117,6 +121,11 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
 VENV_PATH = os.path.dirname(BASE_DIR)
 STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
 MEDIA_ROOT = os.path.join(VENV_PATH, 'media_root')
+
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
 
 
 # Tinymce
