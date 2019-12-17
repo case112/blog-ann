@@ -10,6 +10,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
+
+
+
+RECAPTCHA_PUBLIC_KEY = RECAPTCHA_PUBLIC_KEY
+
+RECAPTCHA_PRIVATE_KEY = RECAPTCHA_PRIVATE_KEY
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -30,6 +38,7 @@ INSTALLED_APPS = [
     'django_instagram',
     'tinymce',
     'debug_toolbar',
+    'captcha',
 
 
     'posts',
