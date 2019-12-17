@@ -1,6 +1,9 @@
 from django import forms
 from tinymce import TinyMCE
 from . models import Post, Comment
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
+
 
 class TinyMCEWidget(TinyMCE):
 	def use_required_attribute(self, *args):
@@ -34,6 +37,12 @@ class CommentForm(forms.ModelForm):
 
 		}))
 
+	captcha = ReCaptchaField(label='', widget=ReCaptchaV2Checkbox(attrs={
+			'class': 'post-captcha',
+            'data-theme': 'light',
+        }))
+
 	class Meta:
 		model = Comment
 		fields = ('name', 'comment', )
+
