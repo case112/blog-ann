@@ -86,11 +86,20 @@
          
 
           <!-- Add Comments -->
-          <div class="add-comment">
+          <div class="add-comment" id='comment-view'>
+            {% if messages %}
+            
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} messages" role="alert">
+              {{ message }}
+            </div>
+            {% endfor %}
+            
+            {% endif %}
             <header>
               <h3 class="h6">Leave a comment</h3>
             </header>
-            <form method="POST" action="." class="commenting-form">
+            <form method="POST" action="#comment-view" class="commenting-form">
               {% csrf_token %}
               <div class="row">
                 <div class="form-group col-md-12">
@@ -98,7 +107,7 @@
                 </div>
                 <div class="form-group col-md-12">
                   <button type="submit" class="btn btn-secondary">Submit Comment</button>
-                  <span class="no-of-comments">( Comments appear after moderation )</span>
+                  <span class="no-of-comments"></span>
                 </div>
               </div>
             </form>

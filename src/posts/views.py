@@ -3,6 +3,8 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from . models import Post
 from .forms import CommentForm
 from django.views.generic.base import TemplateView
+from django.contrib import messages
+
 
 class InstaView(TemplateView):
 
@@ -68,6 +70,7 @@ def post(request, slug):
 		if form.is_valid():
 			form.instance.post = post
 			form.save()
+			messages.success(request, 'Comment submited, thank you! It will appear after moderation.')
 
 	return render(request, 'post.html', {
 		'post': post, 
