@@ -41,10 +41,10 @@ max-width: 100%;
 @font-face {
 	font-family:"footerFont";
 	src:
-	url("/static/fonts/Sansation_Light.eot?") format("eot"),
-	url("/static/fonts/Sansation_Light.woff") format("woff"),
-	url("/static/fonts/Sansation_Light.ttf") format("truetype"),
-	url("/static/fonts/Sansation_Light.svg#SansationLight") format("svg");
+	url("/static/fonts/Sansation_Bold.eot?") format("eot"),
+	url("/static/fonts/Sansation_Bold.woff") format("woff"),
+	url("/static/fonts/Sansation_Bold.ttf") format("truetype"),
+	url("/static/fonts/Sansation_Bold.svg#SansationBold") format("svg");
 	font-weight:600;
 }
 
@@ -54,6 +54,7 @@ max-width: 100%;
 	padding-bottom: 30px;
     background-color: #030100;
     font-family: footerFont;
+    color: white;
     
     
 }
