@@ -894,7 +894,6 @@ section.latest-posts header {
 }
 
 .post .title::after,
-.post .date::after,
 .post .comments::after,
 .post .views::after {
   content: '|';
