@@ -67,10 +67,13 @@ def post(request, slug):
 	form = CommentForm(request.POST or None)
 	if request.method == 'POST':
 
+		pDict = request.POST.copy() 
+		form = CommentForm(pDict)
 		if form.is_valid():
 			form.instance.post = post
 			form.save()
-			messages.success(request, 'Comment submited, thank you! It will appear after moderation.')
+			form = CommentForm()
+			messages.success(request, 'Comment submitted! Thanks for Your input, comment will appear after moderation.')
 
 	return render(request, 'post.html', {
 		'post': post, 

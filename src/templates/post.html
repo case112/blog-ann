@@ -2,8 +2,10 @@
 {% block content %}
 {% load static %}
 
+{% if post.status == 1 or user.is_authenticated %}
+
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('{{ post.thumbnail.url }}')">
+<header class="masthead" style="background-image: url('{{ post.cover_photo.url }}')">
   <div class="overlay"></div>
   <div class="container">
     <div class="row">
@@ -14,6 +16,9 @@
           <span class="meta">Posted by
             <a href="#">{{ post.author.user.username }}</a>
             on {{ post.created_on|date:"F j, Y" }}</span>
+          {% if post.status == 0 and user.is_authenticated %}
+          <h1>[ DRAFT ]</h1>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -40,7 +45,7 @@
               <h6>{{ previous_post }}</h6>
             </div></a>
              {% else %}
-             <a href="." class="prev-post text-left d-flex align-items-center">
+             <a href="." class="prev-post text-left d-flex align-items-center newest-post">
               <div class="text">
                 <strong class="text-primary"> </strong>
                 <h6>This is the newest post</h6>
@@ -118,7 +123,28 @@
     </div>
 </div>
 
+{% else %}
 
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>This post does not exist..</h1>
+          <h2 class="subheading"></h2>
+          <span class="meta">Go back 
+            <a href="/">home</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div style="height: 200px">
+</div>
+{% endif %}
             
           
 
