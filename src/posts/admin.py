@@ -3,14 +3,19 @@ from django.contrib import admin
 from . models import Author, Category, Post, Comment
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'status', 'created_on')
+    list_display = ('title', 'slug', 'status', 'created_on', 'updated_on')
     list_filter = ("status",)
     search_fields = ['title', 'content']
+    actions = ['publish_post']
     prepopulated_fields = {'slug': ('title',)}
+
+    def publish_post(self, request, queryset):
+        queryset.update(status=1)
+
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'comment', 'created_date', 'approved_comment')
+    list_display = ('name', 'comment', 'post', 'created_date', 'approved_comment')
     list_filter = ('approved_comment', 'created_date')
     search_fields = ('name', 'comment')
     actions = ['approve_comments']

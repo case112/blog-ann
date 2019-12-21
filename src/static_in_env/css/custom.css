@@ -58,7 +58,17 @@ max-width: 100%;
 .spacer {
 	height: 40px;
 }
+
+.spacer-nopost {
+	height: 1000px;
+}
+
  .redd {
  	color: #c94740;
+ }
+
+ .newest-post {
+ 	pointer-events:none;
+ 	cursor:default;
  }
 
