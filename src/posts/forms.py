@@ -22,6 +22,7 @@ class Meta:
 
 
 class CommentForm(forms.ModelForm):
+
 	name = forms.CharField(label='', widget=forms.TextInput(attrs={
 		'class': 'form-control',
 		'placeholder': 'Type your name',

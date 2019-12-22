@@ -15,14 +15,14 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'comment', 'post', 'created_date', 'approved_comment')
+    list_display = ('name', 'user', 'comment', 'post', 'created_date', 'approved_comment')
     list_filter = ('approved_comment', 'created_date')
     search_fields = ('name', 'comment')
     actions = ['approve_comments']
 
     def approve_comments(self, request, queryset):
         queryset.update(approved_comment=True)
-  
+
 
 admin.site.register(Author)
 admin.site.register(Category)

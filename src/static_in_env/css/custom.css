@@ -72,3 +72,12 @@ max-width: 100%;
  	cursor:default;
  }
 
+ .comment-author{
+ 	color: #db2b42 !important;
+ 	text-decoration: underline #0085a1;
+ }
+
+ .errorlist {
+ 	color: #db2b42 !important;
+ 	font-weight:bold;
+ }
