@@ -17,6 +17,8 @@ RECAPTCHA_PUBLIC_KEY = RECAPTCHA_PUBLIC_KEY
 
 RECAPTCHA_PRIVATE_KEY = RECAPTCHA_PRIVATE_KEY
 
+OTP_TOTP_ISSUER = OTP_CODE
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -34,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_otp',
+    'django_otp.plugins.otp_totp',
     'sorl.thumbnail', # required for thumbnail support - django-instagram
     'django_instagram',
     'tinymce',
@@ -46,6 +50,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -54,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_otp.middleware.OTPMiddleware',
 ]
 
 ROOT_URLCONF = 'blog.urls'
