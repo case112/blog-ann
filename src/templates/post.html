@@ -78,8 +78,17 @@
             <div class="comment">
               <div class="comment-header d-flex justify-content-between">
                 <div class="user d-flex align-items-center">
+                  {% if comment.user != null %}
+                  <div class="image"><img src="{{ post.author.profile_picture.url }}" alt="..." class="img-fluid rounded-circle"></div>
+                  {% else %}
                   <div class="image"><img src="{% static 'img/comment.svg' %}" alt="..." class="img-fluid rounded-circle"></div>
-                  <div class="title"><strong>{{ comment.name }}</strong><span class="date">Commented on {{ comment.created_date|date:"d.m.y, G:i" }}</span></div>
+                  {% endif %}
+                  {% if comment.user != null %}
+                  <div class="title"><strong class="comment-author">{{ post.author }}</strong>
+                  {% else %}
+                  <div class="title"><strong>{{ comment.name }}</strong>
+                  {% endif %}
+                    <span class="date">Commented on {{ comment.created_date|date:"d.m.y, G:i" }}</span></div>
                 </div>
               </div>
               <div class="comment-body">
