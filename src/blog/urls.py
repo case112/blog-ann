@@ -2,11 +2,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django_otp.admin import OTPAdminSite
 
 from posts.views import index, blog, post, contact, about, InstaView
 
+admin.site.__class__ = OTPAdminSite
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('beyourselfannblog/', admin.site.urls, name='admin'),
     path('', index),
     path('insta/', InstaView.as_view()),
     path('contact/', contact),

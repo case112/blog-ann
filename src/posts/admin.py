@@ -3,6 +3,8 @@ from django.contrib import admin
 from . models import Author, Category, Post, Comment
 
 class PostAdmin(admin.ModelAdmin):
+    fields = ['author', 'title', 'slug', 'overview', 'content', 'thumbnail', 'cover_photo', 'categories', 'featured', 'status']
+
     list_display = ('title', 'slug', 'status', 'created_on', 'updated_on')
     list_filter = ("status",)
     search_fields = ['title', 'content']
