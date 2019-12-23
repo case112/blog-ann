@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from . models import Post
+from . models import Post, Page
 from .forms import CommentForm
 from django.views.generic.base import TemplateView
 from django.contrib import messages
@@ -18,9 +18,11 @@ class InstaView(TemplateView):
 def index(request):
 	featured = Post.objects.filter(status=1, featured=True)
 	latest = Post.objects.filter(status=1).order_by('-created_on')[0:3]
+	page = Page.objects.filter(name="Home")
 	context = {
 		'object_list': featured,
 		'latest': latest,
+		'page': page,
 		'instagram_profile_name': 'anngretts',
 	}
 	return render(request, 'index.html', context)

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from . models import Author, Category, Post, Comment
+from . models import Author, Category, Post, Comment, Page
 
 class PostAdmin(admin.ModelAdmin):
     fields = ['author', 'title', 'slug', 'overview', 'content', 'thumbnail', 'cover_photo', 'categories', 'featured', 'status']
@@ -30,4 +30,5 @@ admin.site.register(Author)
 admin.site.register(Category)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(Page)
 
