@@ -8,6 +8,7 @@ STATUS = (
     (1,"Publish")
 )
 
+
 User = get_user_model()
 
 
@@ -69,6 +70,19 @@ class Comment(models.Model):
 
 	def __str__(self):
 		return self.comment
+
+
+class Page(models.Model):
+	cover_photo = models.ImageField()
+	name = models.CharField(max_length=300)
+	heading = models.CharField(max_length=300)
+	subheading = models.CharField(max_length=300, blank=True)
+	meta = models.CharField(max_length=300, blank=True)
+	content = models.TextField(blank=True)
+
+
+	def __str__(self):
+		return self.name
 
 
 
