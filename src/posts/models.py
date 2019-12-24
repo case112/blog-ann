@@ -74,8 +74,8 @@ class Comment(models.Model):
 
 class Page(models.Model):
 	cover_photo = models.ImageField()
-	name = models.CharField(max_length=300)
-	heading = models.CharField(max_length=300)
+	name = models.CharField(max_length=300, null=True)
+	heading = models.CharField(max_length=300, null=True)
 	subheading = models.CharField(max_length=300, blank=True)
 	meta = models.CharField(max_length=300, blank=True)
 	content = models.TextField(blank=True)
