@@ -4,19 +4,21 @@
 
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('/static/img/contact-bg.jpg')">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="page-heading">
-            <h1>Contact Me</h1>
-            <span class="subheading">Have questions? I have answers.</span>
+{% for obj in header %}
+<header class="masthead" style="background-image: url({{ obj.cover_photo.url }})">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <h1>{{ obj.heading }}</h1>
+            <span class="subheading">{{ obj.subheading }}</span>
           </div>
         </div>
       </div>
     </div>
   </header>
+  {% endfor %}
 
   <!-- Main Content -->
   <div class="container">

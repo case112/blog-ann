@@ -18,20 +18,28 @@ class InstaView(TemplateView):
 def index(request):
 	featured = Post.objects.filter(status=1, featured=True)
 	latest = Post.objects.filter(status=1).order_by('-created_on')[0:3]
-	page = Page.objects.filter(name="Home")
+	header = Page.objects.filter(name="Home")
 	context = {
 		'object_list': featured,
 		'latest': latest,
-		'page': page,
+		'header': header,
 		'instagram_profile_name': 'anngretts',
 	}
 	return render(request, 'index.html', context)
 
 def contact(request):
-	return render(request, 'contact.html', {})
+	header = Page.objects.filter(name="Contact")
+	context = {
+		'header': header,
+	}
+	return render(request, 'contact.html', context)
 
 def about(request):
-	return render(request, 'about.html', {})
+	header = Page.objects.filter(name="About")
+	context = {
+		'header': header,
+	}
+	return render(request, 'about.html', context)
 
 
 def blog(request):
@@ -40,6 +48,7 @@ def blog(request):
 	paginator = Paginator(post_list, 6)
 	page_request_var = 'page'
 	page = request.GET.get(page_request_var)
+	header = Page.objects.filter(name="Blog")
 	try:
 		paginated_queryset = paginator.page(page)
 	except PageNotAnInteger:
@@ -51,6 +60,7 @@ def blog(request):
 		'queryset': paginated_queryset,
 		'most_recent': most_recent,
 		'page_request_var': page_request_var,
+		'header': header,
 	}
 	return render(request, 'blog.html', context)
 
