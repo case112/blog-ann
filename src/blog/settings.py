@@ -10,12 +10,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
-
+ 
 
 
 RECAPTCHA_PUBLIC_KEY = RECAPTCHA_PUBLIC_KEY
 
 RECAPTCHA_PRIVATE_KEY = RECAPTCHA_PRIVATE_KEY
+
 
 OTP_TOTP_ISSUER = OTP_CODE
 
